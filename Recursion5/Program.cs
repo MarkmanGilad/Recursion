@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,21 +11,22 @@ namespace Recursion5
     {
         static void Main(string[] args)
         {
-            //F(1);
+            //F1(1);
             //Numbers(5);
             //Numbers_down(5);
             //revese_digit(3528);
             //convert_to_base(244, 2);
             //char[] arr = {'a', 'b', 'c', 'd', 'e', 'f'};
             //print_array(arr, 0);
-            //string str = "Hello my world";
+            string str = "Hello my world";
             //Rev_Word(str, 0);
+            Rev_Word2(str);
             //string str = "1234567";
             //From_middle(str, 0, str.Length-1);
             //string numbers = Numbers1(4);
             //Console.WriteLine(numbers);
             //Console.WriteLine(Numbers2(9));
-            Console.WriteLine(factorial(10));
+            //Console.WriteLine(factorial(10));
             //Console.WriteLine(sigma(12));
             //Console.WriteLine(Arithmetic_series(3));
             //Console.WriteLine(print_series(5));
@@ -62,8 +64,10 @@ namespace Recursion5
                 Console.WriteLine("stop");
                 return;
             }
+            Console.WriteLine(a);
             F1(a + 1);
             Console.WriteLine(a);
+
         }
 
         public static void Numbers(int n)
@@ -130,6 +134,14 @@ namespace Recursion5
             Console.WriteLine(str[i]);
         }
 
+        public static void Rev_Word2(string str)
+        {
+            if (str[0] == ' ')
+                return;
+            Rev_Word2(str.Substring(1));
+            Console.WriteLine(str[0]);
+        }
+
         public static void From_middle(string str, int i, int j)
         {
             if (i == j)
@@ -141,6 +153,32 @@ namespace Recursion5
                 From_middle(str, i + 1, j - 1);
                 Console.Write("" + str[i] + str[j]);
             }
+        }
+
+        public static void isPalyndrom(string str, int i, int j)
+        {
+            if (j - i < 2)
+                Console.Write("Polyndrom");
+
+            if (str[i] != str[j])
+            {
+                Console.Write("Not Polyndrom");
+            }
+
+            isPalyndrom(str, i + 1, j - 1);
+        }
+
+        public static void isPalyndrom2(string str)
+        {
+            if (str.Length < 2)
+                Console.Write("Polyndrom");
+
+            if (str[0] != str[str.Length-1])
+            {
+                Console.Write("Not Polyndrom");
+            }
+
+            isPalyndrom2(str.Substring(1, str.Length - 2));
         }
 
         public static string Numbers1 (int n)
@@ -299,6 +337,13 @@ namespace Recursion5
                         
             return (str[0] == str[str.Length-1]) && isPalindrome(str.Substring(1,str.Length-2));
         }
+
+        public static void slice()
+        {
+            string str = "Hello World";
+            Console.Write(str.Substring(2, str.Length-2));
+        }
+        
 
     }
 }

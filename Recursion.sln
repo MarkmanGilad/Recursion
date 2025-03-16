@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recursion5", "Recursion5\Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exam2022", "Exam2022\Exam2022.csproj", "{F4FC18C2-2782-4A39-BCF1-118D3530F7AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rec_Template", "Rec_Template\Rec_Template.csproj", "{311CE8A7-B2E2-43F8-AE25-FFFFBB90185E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yahav", "Yahav\Yahav.csproj", "{897B9ADA-918B-45B6-85A5-D76846648D77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{F4FC18C2-2782-4A39-BCF1-118D3530F7AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4FC18C2-2782-4A39-BCF1-118D3530F7AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4FC18C2-2782-4A39-BCF1-118D3530F7AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{311CE8A7-B2E2-43F8-AE25-FFFFBB90185E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{311CE8A7-B2E2-43F8-AE25-FFFFBB90185E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{311CE8A7-B2E2-43F8-AE25-FFFFBB90185E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{311CE8A7-B2E2-43F8-AE25-FFFFBB90185E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{897B9ADA-918B-45B6-85A5-D76846648D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{897B9ADA-918B-45B6-85A5-D76846648D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{897B9ADA-918B-45B6-85A5-D76846648D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{897B9ADA-918B-45B6-85A5-D76846648D77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
