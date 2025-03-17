@@ -51,5 +51,18 @@ namespace Rec_Template
             // return left + right + current
         }
 
+
+        public static int rec_func (int param)
+        {
+            if (stop_condition)
+            {
+                return result;
+            }
+            do_something / calculate;
+
+            return rec_func(param);
+
+        }
+
     }
 }

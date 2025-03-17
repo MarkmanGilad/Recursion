@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,11 +19,18 @@ namespace Recursion5
             //convert_to_base(244, 2);
             //char[] arr = {'a', 'b', 'c', 'd', 'e', 'f'};
             //print_array(arr, 0);
-            string str = "Hello my world";
+            //string str = "Hello my world";
             //Rev_Word(str, 0);
-            Rev_Word2(str);
+            //Rev_Word2(str);
             //string str = "1234567";
             //From_middle(str, 0, str.Length-1);
+            //Console.WriteLine(isExponent(17));
+            //Console.WriteLine(log_2(129, 0));
+
+            //string[] arr = { "alef", "Bet", "Cammel", "Caa" };
+            //Console.WriteLine(IsAlphabetOrdered(arr,0));
+            //double[] arr = { 5, 12, 21, 2 };
+            //Console.WriteLine(sum_divide_small1(arr,0,0)); 
             //string numbers = Numbers1(4);
             //Console.WriteLine(numbers);
             //Console.WriteLine(Numbers2(9));
@@ -39,10 +47,16 @@ namespace Recursion5
             //Console.WriteLine(count_digit(35789));
             //Console.WriteLine(count_digit_small(35700));
             //Console.WriteLine(isPalindrome("abcddcba"));
+            //double[] arr = { -2.1, 0, 1.5, 3.2, 5.5, 12};
+            //Console.WriteLine(is_sort_exists(arr,3.2, 0, arr.Length-1));
 
-
+            //Combination_string1(3, "");
+            Fibunachi_series(11);
             Console.WriteLine();
         }
+        
+        
+        
         public static void F(int a)
         {
             if(a == 4)
@@ -118,6 +132,9 @@ namespace Recursion5
             Console.Write(num % b);
 
         }
+
+        /*****************************************/
+
         public static void print_array (char [] arr, int i)
         {
             if (i == arr.Length)
@@ -181,43 +198,217 @@ namespace Recursion5
             isPalyndrom2(str.Substring(1, str.Length - 2));
         }
 
-        public static string Numbers1 (int n)
+
+        /*****************************************/
+
+        public static bool isExponent (int n)
         {
             if (n == 1)
-                return "" + n;
+                return true;
+            if (n % 2 != 0)
+                return false;
 
-            string ret = Numbers1(n - 1);
-            return n + ret;
+            return isExponent(n / 2);
+        }
+
+        public static int log_2(int n, int exp)
+        {
+            if (n == 1)
+                return exp;
+            if (n % 2 != 0)
+                return -1;
+
+            return log_2(n / 2, exp+1);
+        }
+
+        public static bool IsExist (int[] arr, int n, int i)
+        {
+            if (i == arr.Length)
+                return false;
+
+            if (arr[i] == n)
+                return true;
+
+            return IsExist(arr, n, i+1);
+        }
+
+        public static int Find (int[] arr, int n, int i)
+        {
+            if (i == arr.Length)
+                return -1;
+
+            if (arr[i] == n)
+                return i;
+
+            return Find(arr, n, i + 1);
+        }
+
+        public static bool IsAlphabetOrdered (string[] arr, int i)
+        {
+            if (i == arr.Length-1)
+                return true;
+
+            if (arr[i].CompareTo(arr[i+1]) > 0)
+                return false;
+
+            return IsAlphabetOrdered(arr, i + 1);
+        }
+
+        public static double ArrSum(double[] arr, int i, double sum)
+        {
+            if (i == arr.Length-1)
+                return sum;
+                        
+            return ArrSum(arr, i+ 1, sum + arr[i]);
+        }
+
+        public static int Count_even (int[] arr, int i, int count)
+        {
+            if (i == arr.Length-1)
+                return count;
+
+            if (arr[i] % 2 == 0)
+                count++;
+
+            return Count_even (arr, i+1, count);
+        }
+
+        public static int Sigma(int num, int sum)
+        {
+            if (num == 0)
+                return sum;
+            
+            return Sigma (num-1, sum += num);
+        }
+
+        public static int Factorial(int num, int result)        // init result = 1
+        {
+            if (num == 1)
+                return result;
+
+            return Factorial(num - 1, result *= num);
+        }
+
+        public static double Arr_max (double[] arr, int i, double max)  // init max = arr[0]
+        {
+            if (i == arr.Length-1)
+                return max;
+
+            if (arr[i] > max)
+                max = arr[i];
+
+            return Arr_max(arr, i+1, max);
+
+        }
+
+        public static double Find_min(double[] arr, int i, double min, int min_index)  // init min = arr[0]; min_index = 0
+        {
+            if (i == arr.Length - 1)
+                return min_index;
+
+            if (arr[i] < min)
+            {
+                min = arr[i];
+                min_index = i;
+            }
+
+            return Find_min(arr, i + 1, min, min_index);
+
         }
 
 
-        public static string Numbers2(int n)
-        {
-            if (n == 1)
-                return "" + n;
 
-            return n + Numbers2(n - 1);
+        /*****************************************/
+
+        public static int Count_digits (int num)
+        {
+            if (num < 10)
+                return 1;
+
+            return Count_digits(num/ 10) + 1;
         }
+
+        public static int Count_digits1(int num)
+        {
+            if (num < 10)
+                return 1;
+            
+            int count = Count_digits1(num / 10);
+            return  count + 1;
+        }
+
+        public static int count_odds(int[] arr, int i)
+        {
+            if (i == arr.Length - 1)
+                return 0;
+
+            int count = count_odds(arr, i + 1);
+
+            if (arr[i] % 2 != 0)
+                return count + 1;
+            return count;
+        }
+
+        public static int count_odds1 (int[] arr, int i)
+        {
+            if (i == arr.Length - 1)
+                return 0;
+
+            if (arr[i] % 2 != 0)
+                return count_odds1 (arr, i+1) + 1;
+            return count_odds1 (arr, i + 1);
+        }
+
+        /*****************************************/
+
 
         public static int factorial(int n)
         {
             if (n == 1)
                 return n;
             int result = factorial(n - 1);
-            
-            Console.WriteLine(result);
             return result * n;
 
         }
-
-        public static int sigma (int n)
+        public static int factorial1 (int n)
         {
             if (n == 1)
                 return n;
-            return n + sigma (n - 1);
+            return factorial1 (n - 1) * n;
         }
 
-        public static double Arithmetic_series (int n)
+        public static int sigma(int n)
+        {
+            if (n == 1)
+                return n;
+            return n + sigma(n - 1);
+        }
+
+
+        public static double sum_divide_small(double[] arr, int i, double sum)
+        {
+            if (i == arr.Length)
+                return sum;
+
+            sum += arr[i];
+            double res = sum_divide_small (arr, i+1, sum); 
+            if (arr[i] < 10)
+                return res / arr[i];
+            return res;
+        }
+
+        public static double sum_divide_small1(double[] arr, int i, double sum)
+        {
+            if (i == arr.Length)
+                return sum;
+
+            if (arr[i] < 10)
+                return sum_divide_small1(arr, i + 1, sum += arr[i]) / arr[i];
+
+            return sum_divide_small1(arr, i + 1, sum += arr[i]);
+        }
+        
+        public static double Arithmetic_series(int n)
         {
             if (n == 1)
                 return 2; // a_1 = 2
@@ -240,7 +431,7 @@ namespace Recursion5
         public static double series(int n, double a_1, double q)
         {
             if (n == 1)
-                return a_1; 
+                return a_1;
 
             return q * series(n - 1, a_1, q);
         }
@@ -249,36 +440,12 @@ namespace Recursion5
         {
             if (n == 1)
             {
-                return a_1; 
+                return a_1;
             }
 
             double res = write_series(n - 1, a_1, q);
             Console.WriteLine(res);
             return q * res;
-        }
-
-        public static void prime (int n, int i) // i = 2
-        {
-            if (n == 1)
-                return;
-
-            if (n % i == 0)
-            {
-                prime(n / i, i);
-                Console.WriteLine(i);
-            } 
-            else
-            {
-                prime(n, i + 1);
-            }
-        }
-
-        public static int sum_digit (int n)
-        {
-            if (n < 10)
-                return n;
-
-            return n % 10 + sum_digit(n / 10);            
         }
 
         public static int multiply(int m1, int m2)
@@ -289,7 +456,7 @@ namespace Recursion5
             return m1 + multiply(m1, m2 - 1);
         }
 
-        public static int Exp (int num, int power)
+        public static int Exp(int num, int power)
         {
             if (power == 1)
                 return num;
@@ -297,46 +464,187 @@ namespace Recursion5
             return num * Exp(num, power - 1);
         }
 
-        public static int sum_digit_bigger(int n , int b)
-        {
-            if (n < 10)
-                if (n >= b)
-                    return n;
-                else
-                    return 0;
+        /*****************************************/
 
-            if (n % 10 >= b)
-                return n % 10 + sum_digit_bigger(n / 10, b);
-            else 
-                return sum_digit_bigger(n / 10, b);
+        public static bool is_exists_positive(double[] arr, int i)
+        {
+            if (i == arr.Length)
+                return false;
+            
+            return is_exists_positive(arr, i+1) || arr[i] > 0;
         }
 
-        public static int count_digit (int n)
+        public static bool is_all_positive (double[] arr, int i)
         {
-            if (n == 0)
-                return 0;
+            if (i == arr.Length)
+                return true;
 
-            return 1 + count_digit(n / 10);
+            return is_all_positive (arr, i + 1) && arr[i] > 0;
         }
 
-        public static int count_digit_small(int n)
-        {
-            if (n == 0)
-                return 0;
-
-            if (n % 10 < 5)
-                return 1 + count_digit_small(n / 10);
-            else
-                return count_digit_small(n / 10);
-        }
-
-        public static Boolean isPalindrome (string str)
+        public static Boolean isPalyndrom(string str)
         {
             if (str.Length < 2)
                 return true;
-                        
-            return (str[0] == str[str.Length-1]) && isPalindrome(str.Substring(1,str.Length-2));
+
+            return isPalyndrom(str.Substring(1, str.Length - 2)) && str[0] == str[str.Length - 1]; 
         }
+        
+        public static Boolean isPalyndrom1 (string str)
+        {
+            if (str.Length < 2)
+                return true;
+
+            bool res = isPalyndrom1(str.Substring(1, str.Length - 2));
+            return  res && str[0] == str[str.Length - 1];
+        }
+
+        /*****************************************/
+        public static double smallest (double[] arr, int i)
+        {
+            if (i == arr.Length-1)
+                return arr[i];
+
+            return Math.Min(smallest (arr, i + 1), arr[i]);
+        }
+
+        /*****************************************/
+
+        public static bool is_sort_exists (double[] arr, double num, int i, int j)
+        {
+            if (i > j)
+                return false;
+
+            int k = (i + j) / 2;
+            if (arr[k] == num)
+                return true;
+            else if (num < arr[k])
+                return is_sort_exists(arr, num, i, k - 1);
+            else
+                return is_sort_exists(arr, num, k + 1, j);
+        }
+
+        public static int find_sort(double[] arr, double num, int i, int j)
+        {
+            if (i > j)
+                return -1;
+
+            int k = (i + j) / 2;
+            if (arr[k] == num)
+                return k;
+            else if (num < arr[k])
+                return find_sort(arr, num, i, k - 1);
+            else
+                return find_sort(arr, num, k + 1, j);
+        }
+
+        public static void prime_dividres(int n, int divider) // divider = 2
+        {
+            if (n == 1)
+                return;
+
+            if (n % divider == 0)
+            {
+                prime_dividres(n / divider, divider);
+                Console.WriteLine(divider);
+            }
+            else
+            {
+                prime_dividres(n, divider + 1);
+            }
+        }
+
+
+        public static bool is_valid (string str, int count)
+        {
+            if (str.Length == 0)
+                if (count == 0)         // סןגריים מאוזנים
+                    return true;
+                else                    // סוגריים לא מאוזנים
+                    return false;
+
+            if (str[0] == '(')             // אם סוגריים פותחות תתקדם ברשימה ותוסיף 1 למספור
+                return is_valid(str.Substring(1), count+1);
+
+            if (str[0] == ')' && count == 0) // אם הסוגריים סוגרות ואין סוגריים פותחות - תחזיר שקר
+                return false;
+            if (str[0] == ')')                 // אם סוגריים סוגרות תחסיר אחד ממספר הסוגריים ותתקדם ברשימה.
+                return is_valid(str.Substring(1), count - 1);
+
+            return is_valid(str.Substring(1), count);    // אם לא סוגריים כלל - תתקדם ברשימה מבלי לשנות את מספר הסוגריים
+        }
+
+
+
+        /*****************************************/
+
+
+        public static void Combination_string(int n, string st)  // n - מספר התווים במחרוזת הסופית
+        {
+            if (n == 0)
+            {
+                Console.WriteLine(st);
+                return;
+            }
+            Combination_string (n - 1, st + "a");
+            Combination_string (n - 1, st + "b");
+        }
+
+        public static void Combination_string1(int n, string st)  // n - מספר התווים במחרוזת הסופית
+        {
+            if (n == 0)
+            {
+                Console.WriteLine(st);
+                return;
+            }
+            Console.WriteLine(st);
+            Combination_string1 (n - 1, st + "a");
+            Combination_string1 (n - 1, st + "b");
+        }
+
+
+        public static int count_Comb (int n, string st)  // n - מספר התווים במחרוזת הסופית
+        {
+            if (n == 0)
+                return 1;
+            
+            return count_Comb (n - 1, st + "a") + count_Comb (n - 1, st + "b");
+        }
+        
+        public static int count_Comb_2 (int n, string st)  // n - מספר התווים במחרוזת הסופית
+        {
+            if (n == 0)
+                return 1;
+
+            return 1 + count_Comb_2 (n - 1, st + "a") + count_Comb_2 (n - 1, st + "b");
+        }
+
+        public static int Fibunachi (int n)
+        {
+            if (n == 0)
+                return 0;
+            if (n== 1)
+                return 1;
+
+            return Fibunachi(n - 1) + Fibunachi(n - 2);
+        }
+
+        public static void Fibunachi_series(int n, int a = 0, int b = 1)
+        {
+            if (n == 1)
+            {
+                Console.Write(a);
+                return;
+            }
+            Console.Write(a + ", ");                
+            Fibunachi_series(n - 1, b, a+b);
+        }
+
+        /*****************************************/
+
+
+
+
 
         public static void slice()
         {

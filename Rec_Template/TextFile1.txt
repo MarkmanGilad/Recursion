@@ -1,0 +1,132 @@
+﻿
+public static int rec_func (params)
+{
+    if (stop_condition)
+        return result;
+    
+    do_something / calculate;
+    return rec_func(param);
+}
+
+
+public static rec_func (converge_param, calc_param(optional))
+{
+    if stop_condition(converge_param) 
+        return result(calc_param)
+
+    do_something / calculate with calc_param
+    return func(converge_param-1, calc_param(optional))
+
+}
+
+public static func (params) {
+
+    if stop_condition
+        return 0 or 1
+
+    res = func(params)
+    if condition
+        return 1 + res     // הוסף 1 לתוצאה
+    else
+        return res         // אל תוסיף 1 לתוצאה
+}
+
+
+public static func (params) 
+{
+
+    if stop_condition
+        return 0 or 1
+
+    if condition
+        return 1 + func(params)     // הוסף 1 לתוצאה
+    else
+        return func(params)         // אל תוסיף 1 לתוצאה
+}
+
+public static func (params) {
+
+    if stop_condition
+        return 0 or 1
+
+    res = func(params)
+    if condition
+        return current_value + res     // הוסף את הערך הנוכחי לתוצאה
+    else
+        return res                     // אל תוסיף לתוצאה
+}
+
+
+public static func (params) 
+{
+
+    if stop_condition
+        return 0 or 1
+
+    if condition
+        return current_value + func(params)     // הוסף את הערך הנוכחי לתוצאה
+    else
+        return func(params)                     // אל תוסיף לתוצאה
+}
+
+
+public static bool func (params) 
+{
+    if stop_condition:
+        return true
+
+    return current_value && func(params) 
+}
+
+public static bool func (params) 
+{
+    if stop_condition:
+        return false
+
+    return current_value || func(params) 
+}
+
+
+public static func (params) 
+{
+    if stop_condition:
+        return value
+
+    return max(current_value, func(params))   # מחזירה את המקסימום
+}
+
+
+public static func (params) 
+{
+    if stop_condition:
+        return value
+
+    res = func(params)
+    if current_value > res:
+        return current_value
+    return res                # else
+}
+ 
+ public static func (params) 
+ {
+    if stop_condition
+        return value
+
+    if condition
+        return func(param = x)
+    return func(param = y)      # else
+ }
+
+ public static func (params) 
+ {
+    if stop_condition
+        return value
+
+    res = None
+    if condition
+        res = func(param = x)
+    else
+        res = func(param = y)
+    return res
+ }
+ 
