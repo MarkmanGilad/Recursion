@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -638,6 +639,79 @@ namespace Recursion5
             }
             Console.Write(a + ", ");                
             Fibunachi_series(n - 1, b, a+b);
+        }
+
+        public static int Fibunachi_item(int n, int a = 0, int b = 1)
+        {
+            if (n == 1)
+                return a;
+
+            return Fibunachi_item(n - 1, b, a + b);
+        }
+
+        public static int minOps (int x, int y)
+        {
+            if (x > y)                  // חרגנו מהיעד - נחזיר אין סוף
+                return int.MinValue;
+            if (x == y)                 // הגענו ליעד נחזיר 0 פעולות
+                return 0;
+            int a = minOps(x+1, y);     // נבדוק פעולת חיבור
+            int b = minOps(x*2, y);     // נבדוק פעולת כפל
+            return 1 + Math.Min(a, b);  // נחזיר את מינימום בין מספר הפעולות שקיבלנו + הפעולה הנוכחית
+
+        }
+
+        public static bool sumPair (double[] arr, int num, int i, int j)
+        {
+            if (i == j)
+                return false;
+            if (arr[i] + arr[j] == num)
+                return true;
+            return sumPair(arr, num, i+1, j) || sumPair(arr,num, i, j+1);
+        }
+
+        public static bool hasSum (double[] arr, double num, int i, double sum)
+        {
+            if (sum == num)
+                return true;
+            if (sum > num)
+                return false;
+            if (i == arr.Length)
+                return false;
+
+            return hasSum(arr, num, i + 1, sum + arr[i] ) || hasSum(arr, num, i + 1, sum);
+        }
+
+        public static bool hasSum_2(double[] arr, double num, int i, double sum)
+        {
+            if (sum == num)
+                return true;
+            if (sum > num)
+                return false;
+            if (i == arr.Length)
+                return false;
+
+            return hasSum_2(arr, num, i , sum + arr[i]) || hasSum_2(arr, num, i + 1, sum);
+        }
+
+
+        public static bool path_exists(int[][] mat, int row, int col, int end_row, int end_col)
+        {
+            if (row == end_row && col == end_col) // הגענו לסיום
+                return true;
+            if (row < 0 || col < 0 || row == mat.Length || col == mat[0].Length) // יצאנו מגבולות המטריצה
+                return false;
+            if (mat[row][col] == 0) // נתקלמו בקיר
+                return false;
+            if (mat[row][col] == -1)    // כבר ביקרנו במקום
+                return false;
+
+            mat[row][col] = -1;         // סמן כמקום שביקרנו
+
+            return path_exists(mat, row + 1, col, end_row, end_col)  ||
+                path_exists(mat, row - 1, col, end_row, end_col)     ||
+                path_exists(mat, row, col + 1, end_row, end_col)     ||
+                path_exists(mat, row, col - 1, end_row, end_col);
         }
 
         /*****************************************/
