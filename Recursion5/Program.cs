@@ -52,7 +52,11 @@ namespace Recursion5
             //Console.WriteLine(is_sort_exists(arr,3.2, 0, arr.Length-1));
 
             //Combination_string1(3, "");
-            Fibunachi_series(11);
+            //Fibunachi_series(11);
+
+            int[] arr = { 23, 310, 29, 12, 113, 34, 57 };
+            Console.WriteLine(foo(arr, 0, arr.Length - 1));
+            
             Console.WriteLine();
         }
         
@@ -714,8 +718,58 @@ namespace Recursion5
                 path_exists(mat, row, col - 1, end_row, end_col);
         }
 
+
+        public static int min_path(int[][] mat, int row, int col, int end_row, int end_col, int length)
+        {
+            if (row == end_row && col == end_col) // הגענו לסיום
+                return length;
+            if (row < 0 || col < 0 || row == mat.Length || col == mat[0].Length) // יצאנו מגבולות המטריצה
+                return int.MaxValue;
+            if (mat[row][col] == 0) // נתקלמו בקיר
+                return int.MaxValue;
+            if (mat[row][col] == -1)    // כבר ביקרנו במקום
+                return int.MaxValue;
+
+            mat[row][col] = -1;         // סמן כמקום שביקרנו
+
+            return Math.Min(min_path(mat, row + 1, col, end_row, end_col, length + 1), 
+                Math.Min(min_path(mat, row - 1, col, end_row, end_col, length + 1),
+                Math.Min(min_path(mat, row, col + 1, end_row, end_col, length + 1),
+                min_path(mat, row, col - 1, end_row, end_col, length + 1))));
+        }
+
+
+        public static int min_path(int[][] mat, int row, int col, int end_row, int end_col)
+        {
+            if (row == end_row && col == end_col) // הגענו לסיום
+                return 0;
+            if (row < 0 || col < 0 || row == mat.Length || col == mat[0].Length) // יצאנו מגבולות המטריצה
+                return int.MaxValue;
+            if (mat[row][col] == 0) // נתקלמו בקיר
+                return int.MaxValue;
+            if (mat[row][col] == -1)    // כבר ביקרנו במקום
+                return int.MaxValue;
+
+            mat[row][col] = -1;         // סמן כמקום שביקרנו
+
+            return 1 + Math.Min(min_path(mat, row + 1, col, end_row, end_col),
+                Math.Min(min_path(mat, row - 1, col, end_row, end_col),
+                Math.Min(min_path(mat, row, col + 1, end_row, end_col),
+                min_path(mat, row, col - 1, end_row, end_col))));
+        }
+
+
         /*****************************************/
 
+        public static int foo(int[] arr, int i, int j)
+        {
+            if (i == j)
+                return arr[i];
+            int k = i + j / 2;
+            return Math.Max(foo(arr, i, k), foo(arr, k + 1, j));
+        }
+
+        
 
 
 
